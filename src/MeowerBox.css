@@ -1,0 +1,41 @@
+.meowerBox {
+    padding: bottom 10px;
+    border-bottom: 8px solid orange;
+}
+
+.meowerBox>form {
+    display: flex;
+    flex-direction: column;
+}
+
+.meowerBox_input {
+    padding: 20px;
+    display: flex;
+}
+
+.meowerBox_input>input {
+    flex: 1;
+    margin-left: 20px;
+    font-size: 20px;
+    border: none;
+    outline: none;
+}
+
+.meowerBox_imageInput {
+    border: none;
+    outline: none;
+    padding: 10px;
+}
+
+.meowerBox_meowerButton {
+    background-color: orange !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 900 !important;
+    text-transform: inherit !important;
+    border-radius: 30px !important;
+    height: 40px !important;
+    margin-top: 20px !important;
+    width: 80px !important;
+    margin-left: auto !important;
+}
