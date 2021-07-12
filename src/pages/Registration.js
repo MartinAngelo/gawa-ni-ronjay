@@ -68,7 +68,7 @@ export default function Registration() {
                 value = { value.confirmpass } onChange = { handleChange("confirmpass") }/>
                 <br/>
                 <button id = "btnReg" onClick = {register}> Sign Up </button> 
-                <p class = "text-bot">By signing up, you agree to our <a>Terms</a>, <a>Data</a><br/><a>Policy</a> and <a>Cookies Policy</a>.</p>
+                <p >By signing up, you agree to our <a>Terms</a>, <a>Data</a><br/><a>Policy</a> and <a>Cookies Policy</a>.</p>
             </div>
         </div>
         <div id = "bottom-container">
