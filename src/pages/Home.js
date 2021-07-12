@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import firebase  from "../utils/firebase";
+import React, { useState} from 'react'
+//import firebase  from "../utils/firebase";
 
 import Nav from "../components/Nav";
 import Title from "../components/Title";
