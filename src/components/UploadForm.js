@@ -1,18 +1,5 @@
 import React, { useState } from 'react';
 import ProgressBar from './ProgressBar';
-// import MenuIcon from '@material-ui/icons/Menu';
-import { 
-    makeStyles, 
-    Grid, 
-    TextField, 
-    Card, 
-    CardContent, 
-    Button,
-    CircularProgress,
-    Typography,
-    IconButton,
-} from "@material-ui/core";
-import {Delete as DeleteIcon} from "@material-ui/icons"
 
 const UploadForm = () => {
   const [file, setFile] = useState(null);
@@ -44,10 +31,6 @@ const UploadForm = () => {
         { file && <div>{ file.name }</div> }
         { file && <ProgressBar file={file} setFile={setFile} /> }
       </div>
-        {/* <IconButton>
-            <DeleteIcon />
-        </IconButton> */}
-      {/* </Grid> */}
     </form>
   );
 }

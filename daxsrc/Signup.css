@@ -1,0 +1,239 @@
+/* #div1 {
+    background-image: url("https://wallpapercave.com/wp/wKe48YR.jpg");
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
+    background-position: center;
+    background-size: 'contain';
+}
+
+#div2 {
+    position: relative;
+    margin: 5% auto 0 auto;
+    width: 30%;
+    height: 600px;
+    background: rgba(23, 31, 109, 0.548);
+    border-radius: 15px;
+}
+
+
+/*CONTACT US = CONTACT US = CONTACT US = CONTACT US = CONTACT US = CONTACT US = CONTACT US = CONTACT US */
+
+/* #div02 {
+    position: relative;
+    margin: 5% auto 0 auto;
+    top: -50px;
+    width: 30%;
+    height: 600px;
+    background: rgba(23, 31, 109, 0.548);
+    border-radius: 15px;
+}
+
+#mImg {
+    position: relative;
+    top: 3%;
+    width: 40%;
+    height: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    background: url("./images/9.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.marq {
+    width: 800px;
+}
+ */
+
+/*CONTACT US = CONTACT US = CONTACT US = CONTACT US = CONTACT US = CONTACT US = CONTACT US = CONTACT US */
+
+/* #mImg1 {
+    position: relative;
+    top: 3%;
+    width: 40%;
+    height: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    background: url("./images/9.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.mTxtbox {
+    position: relative;
+    width: 250px;
+    border: none;
+    border-bottom: 2px solid #000000;
+    background-color: transparent;
+    margin-bottom: 5%;
+    top: -40px;
+    outline: none;
+    font-family: 'Lucida Sans';
+    font-size: 20px;
+    color: #fff;
+}
+
+.mTxtbox:focus {
+    border-color: #fff;
+}
+
+#btnReg {
+    outline: 0;
+    background: none;
+    color: #ffff;
+    font-size: 14px;
+    text-transform: uppercase;
+    width: 150px;
+    padding: 15px;
+    border: 2.5px solid #ffffff;
+    border-radius: 25px;
+}
+
+#btnReg:hover {
+    background: #153e63cb;
+}
+
+#btnReg:active {
+    position: relative;
+    top: 1px;
+}
+
+p {
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+
+#mBtnSign {
+    outline: 0;
+    background: none;
+    color: #ffff;
+    font-size: 14px;
+    text-transform: uppercase;
+    width: 150px;
+    padding: 15px;
+    background-color: transparent;
+    border: none;
+} */
+
+
+/*404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404 = 404*/
+
+/* .lost {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url("./images/zoro.jpg");
+    background-repeat: no-repeat;
+    background-size: 1600px 800px;
+}
+
+.lostzoro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 250px;
+    box-sizing: border-box;
+    background: rgba(166, 166, 241, 0.548);
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.zoro {
+    background: none;
+    font-size: 20px;
+}
+
+.zoro ul li a {
+    color: #562bf3;
+} */
+
+
+/*Home Home Home Home Home Home Home Home Home Home Home Home Home Home Home Home Home Home Home Home Home Home Home Home Home Home Home Home*/
+
+/* .bg8 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url("./images/6.jpg");
+    background-repeat: no-repeat;
+    background-size: 1600px 800px;
+}
+
+.hbutton {
+    outline: 0;
+    background: none;
+    color: #ffff;
+    font-size: 14px;
+    text-transform: uppercase;
+    width: 150px;
+    padding: 15px;
+    border: 2.5px solid #2E86DE;
+    border-radius: 25px;
+}
+
+.hbutton:hover {
+    background: #153e63cb;
+}
+
+.hbutton:active {
+    position: relative;
+    top: 1px;
+}
+
+.inputtxt {
+    outline: 0;
+    background: none;
+    font-size: 15px;
+    text-align: center;
+    width: 265px;
+    margin-bottom: 30px;
+    padding: 15px;
+    box-sizing: border-box;
+    border: 2.5px solid #2E86DE;
+    border-radius: 25px;
+    color: #fff;
+}
+ */
+
+/* Sign-In Sign-In Sign-In Sign-In Sign-In Sign-In Sign-In Sign-In Sign-In Sign-In Sign-In Sign-In Sign-In Sign-In Sign-In Sign-In Sign-In*/
+
+/* #div3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 350px;
+    box-sizing: border-box;
+    background: rgba(23, 31, 109, 0.548);
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.in {
+    margin-top: 10px;
+    margin-bottom: 50px;
+} */
+
+
+/* About Us About Us About Us About Us About Us About Us About Us About Us About Us About Us About Us About Us About Us About Us About Us*/
+
+/* .container1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 600px;
+    box-sizing: border-box;
+    background: rgba(23, 31, 109, 0.548);
+    padding: 40px;
+    border-radius: 15px;
+} */ 

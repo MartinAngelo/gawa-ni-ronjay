@@ -22,11 +22,12 @@ export default function Signin() {
             alert("Please complete all fields!")
         } else {
             firebase.auth().signInWithEmailAndPassword(value.email, value.password)
-            .then((userCredential) => {
+            .then((signedInUser) => {
             // Signed in
             //var user = userCredential.user;
              // ...
-             alert("Signed in")
+             alert("Signed in as " + signedInUser.user.email);
+             console.log (signedInUser.user);
   })
             .catch((error) => {
              //var errorCode = error.code;
@@ -34,19 +35,11 @@ export default function Signin() {
             alert(errorMessage)
   });
         }
-
-        /*if (value.email === "zodiac@gmail.com" && value.password === "password") {
-            alert("Successfully Logged In")
-            history.push("/home");
-        } else {
-            alert("Login Failed");
-        }*/
     };
 
     return ( 
         <div id = "container">
             <div id = "login-container">
-            {/* <div id = "div3"> */}
                 <br/>
                 <h1> iNSTAX </h1> 
                 <br/>
@@ -59,7 +52,6 @@ export default function Signin() {
                 <button id = "btnReg" onClick = {login} > Sign In </button>
                 <br/>
                 <p class = "forgot">Forgot Password?</p>
-            {/* </div>  */}
                 </div>
             </div>
             <div id = "bottom-container2">

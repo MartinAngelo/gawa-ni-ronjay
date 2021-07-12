@@ -4,15 +4,28 @@ import firebase from "firebase";
 import 'firebase/storage';
 import 'firebase/firestore';
 
- var firebaseConfig = {
-    apiKey: "AIzaSyC2NAyCJlT4LMhTMSCRvQrN1dnGVtXa5-Y",
-    authDomain: "bsit-3c-martinangelo.firebaseapp.com",
-    projectId: "bsit-3c-martinangelo",
-    storageBucket: "bsit-3c-martinangelo.appspot.com",
-    messagingSenderId: "937609379656",
-    appId: "1:937609379656:web:8af8d1c731d52300647d7d",
-    measurementId: "G-EGXZCG2JLD"
+// const firebaseApp = firebase.initializeApp({
+var firebaseConfig = {
+    apiKey: "AIzaSyBFQpmE1fnQMNBbIjIV1_ieF9dIpfamXf0",
+    authDomain: "bsit3d-bc27d.firebaseapp.com",
+    projectId: "bsit3d-bc27d",
+    storageBucket: "bsit3d-bc27d.appspot.com",
+    messagingSenderId: "681844982575",
+    appId: "1:681844982575:web:753ce616c48175804f97da",
+    measurementId: "G-WQV76QWB39"
   };
+// })
+
+// const db = firebaseApp.firestore()
+
+// const auth = firebase.auth()
+
+// export { db, auth }
+
+// const firebaseApp = firebase.initializeApp(firebaseConfig)
+// const db = firebaseApp.firestore();
+// export default db;
+
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();

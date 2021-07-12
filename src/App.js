@@ -15,10 +15,20 @@ import firebase from "./utils/firebase";
 import PrivateRoute from "./routers/PrivateRoute";
 import PublicRoute from "./routers/PublicRoute";
 
-import { ThemeProvider } from "@material-ui/core"
+import { ThemeProvider, makeStyles, CircularProgress } from "@material-ui/core"
 import theme from "./utils/theme";
 
 function App() {
+    const useStyles = makeStyles(theme=> ({
+        root: {
+            display: "flex",
+            direction: "column",
+            height: "100vh",
+            width: "100vw",
+            alignItems: "center",
+            justifyContent: "center",
+        }}));
+        const classes = useStyles();
     const [value, setValue] = useState({
         isAuth: false,
         isLoading: true
@@ -35,7 +45,9 @@ function App() {
     }, []);
 
     if (value.isLoading){
-        return <p class="load">Loading...</p>
+        return <div className={classes.root}>
+        <CircularProgress size={160} />
+    </div>
     }
 
     return ( 
