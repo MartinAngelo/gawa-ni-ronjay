@@ -1,8 +1,10 @@
 import "./CSS/stylesheets/App.css";
 import "./CSS/stylesheets/Style.css";
-
 import "./CSS/login.css";
-import "./CSS/chat.css";
+import "./components/nav"
+
+
+
 import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -10,15 +12,9 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-
-//material ui//
 import { ThemeProvider } from "@material-ui/core";
-
-//utils//
 import firebase from "./utils/firebase";
 import theme from "./utils/theme";
-
-//pages//
 import Home from "./pages/Home";
 import MyProfile from "./pages/MyProfile";
 import Loading from "./pages/Loading";
@@ -27,19 +23,8 @@ import Notification from "./pages/Notification";
 import Register from "./pages/Register";
 import Friends from "./pages/Friends";
 import CreateProfile from "./pages/CreateProfile";
-
-
-
-
-
 import PrivateRoute from "./routers/PrivateRoute";
 import PublicRoute from "./routers/PublicRoute";
-
-import chat from "./pages/Chat";
-import SendMessage from "./pages/SendMessage";
-
-
-
 function App() {
   const [state, setState] = useState({
     isAuth: false,
@@ -74,6 +59,7 @@ function App() {
             path="/login"
             exact
           />
+
           <PublicRoute
             component={Register}
             isAuth={state.isAuth}
@@ -115,20 +101,6 @@ function App() {
             component={Loading}
             isAuth={state.isAuth}
             path="/loading"
-            exact
-          />
-
-          <PrivateRoute
-            component={chat}
-            isAuth={state.isAuth}
-            path="/chat"
-            exact
-          />
-
-          <PrivateRoute
-            component={SendMessage}
-            isAuth={state.isAuth}
-            path="/SendMessage"
             exact
           />
         </Switch>

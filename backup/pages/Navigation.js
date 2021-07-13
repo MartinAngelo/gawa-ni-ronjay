@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
-
-import pusa from '../pic/pusa1.png'
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import {
@@ -67,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
   content: {
@@ -223,8 +220,10 @@ export default function Navigation() {
           </div>
         </div>
         <div id="center">
-
-          <img src={pusa} className="pusa" alt="logo" />
+          <Avatar
+            src={avatar.src || ".././assets/images/profile.png"}
+            id="profile"
+          ></Avatar>
         </div>
         <Typography variant="h6" noWrap id="name">
           {userProfile.firstName} {userProfile.lastName}
@@ -233,12 +232,14 @@ export default function Navigation() {
           @{userProfile.userName}
         </Typography>
         <List>
+
           <ListItem button component={Link} to={"/profile"}>
             <ListItemIcon>
               <AccountCircle color="primary" />
             </ListItemIcon>
             <ListItemText>My Profile</ListItemText>
           </ListItem>
+
           <ListItem button component={Link} to={"/home"}>
             <ListItemIcon>
               <HomeIcon color="primary" />
@@ -246,14 +247,12 @@ export default function Navigation() {
             <ListItemText>Home</ListItemText>
           </ListItem>
 
-
-          <ListItem button component={Link} to={"/Chat"}>
+          <ListItem button component={Link} to={"/notification"}>
             <ListItemIcon>
               <NotifIcon color="primary" />
             </ListItemIcon>
-            <ListItemText>Messages</ListItemText>
+            <ListItemText>Notifications</ListItemText>
           </ListItem>
-
 
           <ListItem button component={Link} to={"/friends"}>
             <ListItemIcon>
@@ -261,8 +260,10 @@ export default function Navigation() {
             </ListItemIcon>
             <ListItemText>Friends</ListItemText>
           </ListItem>
+
         </List>
         <Divider />
+        
         <List>
           <ListItem button onClick={signout}>
             <ListItemIcon>

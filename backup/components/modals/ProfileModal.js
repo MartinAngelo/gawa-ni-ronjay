@@ -158,6 +158,9 @@ export default function ProfileModal({ open, setOpen }) {
                             <CloseIcon />
                         </IconButton>
                     </Grid>
+                    <Typography variant="h5">
+                        Your Profile!
+                    </Typography>
                     <input
                         accept="image/*"
                         className={classes.input}

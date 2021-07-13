@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
@@ -101,10 +102,13 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-     
+          <Typography variant="h6" noWrap>
+            Responsive drawer
+          </Typography>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
           <Drawer
             container={container}

@@ -253,7 +253,7 @@ export default function Home() {
                             <div className={classes.centerDiv}>
                                 <Avatar
                                     id="centerAvatar"
-                                    src={avatar.src || ".././CSS/images/profile.png"}
+                                    src={avatar.src || ".././assets/images/profile.png"}
                                 />
                             </div>
                             <div className={classes.centerDiv}>
