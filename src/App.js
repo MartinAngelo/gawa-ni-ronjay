@@ -1,4 +1,6 @@
 import "./assets/stylesheets/App.css";
+import "./assets/stylesheets/Style.css";
+import "./FontAwesomeIcons/iconindex";
 import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
@@ -14,7 +16,7 @@ import MyProfile from "./pages/MyProfile";
 import Loading from "./pages/Loading";
 import Login from "./pages/Login";
 import Notification from "./pages/Notification";
-import Register from "./pages/Registers";
+import Register from "./pages/Register";
 import Friends from "./pages/Friends";
 import CreateProfile from "./pages/CreateProfile";
 import PrivateRoute from "./routers/PrivateRoute";
