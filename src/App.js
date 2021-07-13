@@ -1,6 +1,6 @@
-import "./assets/stylesheets/App.css";
-import "./assets/stylesheets/Style.css";
-import "./FontAwesomeIcons/iconindex";
+import "./CSS/stylesheets/App.css";
+import "./CSS/stylesheets/Style.css";
+import "./CSS/login.css";
 import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,

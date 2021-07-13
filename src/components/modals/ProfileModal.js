@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import logo from "../../assets/images/icon.svg";
+import logo from "../../CSS/images/icon.svg";
 import firebase from "../../utils/firebase";
 import {
     Paper,
@@ -94,7 +94,7 @@ export default function ProfileModal({ open, setOpen }) {
             backgroundColor: theme.palette.secondary.main,
         },
         form: {
-            width: "100%", // Fix IE 11 issue.
+            width: "90%", // Fix IE 11 issue.
             marginTop: theme.spacing(1),
         },
         submit: {
@@ -111,8 +111,8 @@ export default function ProfileModal({ open, setOpen }) {
             display: "none",
         },
         large: {
-            width: 120,
-            height: 120,
+            width: 90,
+            height: 90,
         },
         modalCenter: {
             display: 'flex',

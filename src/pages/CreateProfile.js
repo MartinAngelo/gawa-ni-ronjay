@@ -194,7 +194,7 @@ export default function CreateProfile() {
           <label htmlFor="contained-button-file">
             <IconButton component="span">
               <Avatar
-                src={image.displayURL || ".././assets/images/profile.png"}
+                src={image.displayURL || ".././CSS/images/profile.png"}
                 className={classes.large}
               />
             </IconButton>

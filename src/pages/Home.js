@@ -19,7 +19,6 @@ import {
   CardActions,
 } from "@material-ui/core";
 import ReplyIcon from "@material-ui/icons/Reply";
-import ImageIcon from "@material-ui/icons/PhotoCamera";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 import ReplyModal from "../components/modals/ReplyModal";
@@ -270,11 +269,7 @@ export default function Home() {
                 type="file"
                 className={classes.input}
               />
-              <label htmlFor="contained-button-file">
-                <IconButton component="span">
-                  <ImageIcon />
-                </IconButton>
-              </label>
+
               <Button
                 id="submitBtn"
                 variant="contained"
@@ -283,7 +278,7 @@ export default function Home() {
                 onClick={createPost}
                 disableElevation
               >
-                Talk
+                Post
               </Button>
             </Grid>
           </Card>

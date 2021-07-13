@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import logo from ".././assets/images/icon.svg";
+import logo from ".././CSS/images/icon.svg";
 import { Link } from "react-router-dom";
 import {
   List,

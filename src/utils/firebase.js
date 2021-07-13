@@ -1,13 +1,13 @@
-import firebase from "firebase"; 
+import firebase from "firebase";
 var firebaseConfig = {
-  apiKey: "AIzaSyC23lhv3mFFFPVpbPGzc_pfojiAH_psc_4",
-  authDomain: "bulsutalk.firebaseapp.com",
-  projectId: "bulsutalk",
-  storageBucket: "bulsutalk.appspot.com",
-  messagingSenderId: "3140316284",
-  appId: "1:3140316284:web:41d5587097f4b7d7c2adf9",
-  measurementId: "G-M15P7TN44W"
-  };
+  apiKey: "AIzaSyC2NAyCJlT4LMhTMSCRvQrN1dnGVtXa5-Y",
+  authDomain: "bsit-3c-martinangelo.firebaseapp.com",
+  projectId: "bsit-3c-martinangelo",
+  storageBucket: "bsit-3c-martinangelo.appspot.com",
+  messagingSenderId: "937609379656",
+  appId: "1:937609379656:web:8af8d1c731d52300647d7d",
+  measurementId: "G-EGXZCG2JLD"
+};
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
-export default firebase; 
+export default firebase;
