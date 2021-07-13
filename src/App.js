@@ -1,79 +1,105 @@
+import "./assets/stylesheets/App.css";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import "./App.css";
-import "./Signup.css";
-import Forgot from "./pages/Forgot";
-import Registration from "./pages/Registration";
-import Signin from "./pages/Signin";
-import Home from "./pages/Home";
-import Message from "./pages/Message";
-import Explore from "./pages/Explore";
-import Favorite from "./pages/Favorite";
-import Profile from "./pages/Profile";
-
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
+import { ThemeProvider } from "@material-ui/core";
 import firebase from "./utils/firebase";
+import theme from "./utils/theme";
+import Home from "./pages/Home";
+import MyProfile from "./pages/MyProfile";
+import Loading from "./pages/Loading";
+import Login from "./pages/Login";
+import Notification from "./pages/Notification";
+import Register from "./pages/Registers";
+import Friends from "./pages/Friends";
+import CreateProfile from "./pages/CreateProfile";
 import PrivateRoute from "./routers/PrivateRoute";
 import PublicRoute from "./routers/PublicRoute";
-
-import { ThemeProvider, makeStyles, CircularProgress } from "@material-ui/core"
-import theme from "./utils/theme";
-
 function App() {
-    const useStyles = makeStyles(theme=> ({
-        root: {
-            display: "flex",
-            direction: "column",
-            height: "100vh",
-            width: "100vw",
-            alignItems: "center",
-            justifyContent: "center",
-        }}));
-        const classes = useStyles();
-    const [value, setValue] = useState({
-        isAuth: false,
-        isLoading: true
-    })
+  const [state, setState] = useState({
+    isAuth: false,
+    isLoading: true,
+  });
 
-    useEffect(() => {
-        firebase.auth().onAuthStateChanged(function (user){
-            if (user) {
-                setValue({isAuth: true, isLoading: false})
-            } else {
-                setValue({isAuth: false, isLoading: false})
-            }
-        });
-    }, []);
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        setState({ isAuth: true, isLoading: false });
+      } else {
+        setState({ isAuth: false, isLoading: false });
+      }
+    });
+  }, []);
 
-    if (value.isLoading){
-        return <div className={classes.root}>
-        <CircularProgress size={160} />
-    </div>
-    }
-
-    return ( 
+  if (state.isLoading) {
+    return <p>Loading..</p>;
+  }
+  return (
     <ThemeProvider theme={theme}>
-      <Router >
-        <Switch >
-            <Route path = "/" exact >
-                <Redirect to = "/signin" />
-            </Route> 
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <Redirect to="/login" exact />
+          </Route>
 
-            <PublicRoute component = { Registration } isAuth={value.isAuth} restricted={true} path = "/registration" exact />
-            <PublicRoute component = { Signin } isAuth={value.isAuth} restricted={true} path = "/signin" exact />
-
-            <PrivateRoute component = { Home } isAuth={value.isAuth} path = "/home" exact />
-
-            <PrivateRoute component = { Message } isAuth={value.isAuth} path = "/message" exact />
-            <PrivateRoute component = { Explore } isAuth={value.isAuth} path = "/explore" exact />
-            <PrivateRoute component = { Favorite } isAuth={value.isAuth} path = "/favorite" exact />
-            <PrivateRoute component = { Profile } isAuth={value.isAuth} path = "/profile" exact />
-            <PrivateRoute component = { Forgot } isAuth={value.isAuth} path = "/forgot" exact />
-
-        </Switch> 
+          <PublicRoute
+            component={Login}
+            isAuth={state.isAuth}
+            restricted={true}
+            path="/login"
+            exact
+          />
+          <PublicRoute
+            component={Register}
+            isAuth={state.isAuth}
+            restricted={true}
+            path="/register"
+            exact
+          />
+          <PrivateRoute
+            component={Home}
+            isAuth={state.isAuth}
+            path="/home"
+            exact
+          />
+          <PrivateRoute
+            component={MyProfile}
+            isAuth={state.isAuth}
+            path="/profile"
+            exact
+          />
+          <PrivateRoute
+            component={CreateProfile}
+            isAuth={state.isAuth}
+            path="/createprofile"
+            exact
+          />
+          <PrivateRoute
+            component={Notification}
+            isAuth={state.isAuth}
+            path="/notification"
+            exact
+          />
+          <PrivateRoute
+            component={Friends}
+            isAuth={state.isAuth}
+            path="/friends"
+            exact
+          />
+          <PrivateRoute
+            component={Loading}
+            isAuth={state.isAuth}
+            path="/loading"
+            exact
+          />
+        </Switch>
       </Router>
-    
     </ThemeProvider>
-   );
+  );
 }
 
 export default App;

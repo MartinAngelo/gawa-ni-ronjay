@@ -1,39 +1,14 @@
-import firebase from "firebase";
-// import * as firebase from 'firebase/app';
-
-import 'firebase/storage';
-import 'firebase/firestore';
-
-// const firebaseApp = firebase.initializeApp({
-var firebaseConfig = {
-    apiKey: "AIzaSyBFQpmE1fnQMNBbIjIV1_ieF9dIpfamXf0",
-    authDomain: "bsit3d-bc27d.firebaseapp.com",
-    projectId: "bsit3d-bc27d",
-    storageBucket: "bsit3d-bc27d.appspot.com",
-    messagingSenderId: "681844982575",
-    appId: "1:681844982575:web:753ce616c48175804f97da",
-    measurementId: "G-WQV76QWB39"
-  };
-// })
-
-// const db = firebaseApp.firestore()
-
-// const auth = firebase.auth()
-
-// export { db, auth }
-
-// const firebaseApp = firebase.initializeApp(firebaseConfig)
-// const db = firebaseApp.firestore();
-// export default db;
-
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-
-  export default firebase;
-
-const projectStorage = firebase.storage();
-const projectFirestore = firebase.firestore();
-const timestamp = firebase.firestore.FieldValue.serverTimestamp;
-
-export { projectStorage, projectFirestore, timestamp };
+import firebase from "firebase"; 
+const firebaseConfig = {
+  apiKey: "AIzaSyCNBHkQaVC8IRepuw5nQ3OJT4Kj5D3CocA",
+  authDomain: "f-output.firebaseapp.com",
+  projectId: "f-output",
+  storageBucket: "f-output.appspot.com",
+  messagingSenderId: "501490098731",
+  appId: "1:501490098731:web:93b109b5bdddfac0a3806e",
+  measurementId: "G-QPW2TT5BZG"
+};
+  
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+export default firebase; 
