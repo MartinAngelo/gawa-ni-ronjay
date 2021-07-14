@@ -8,7 +8,6 @@ import {
     Typography,
     Card,
     CardContent,
-    Avatar,
     Grid,
     Divider,
     List,
@@ -17,13 +16,9 @@ import {
     Button
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import ReplyIcon from "@material-ui/icons/Reply";
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 import ProfileModal from "../components/modals/ProfileModal";
-import ReplyModal from "../components/modals/ReplyModal";
-
 const drawerWidth = 240;
 const db = firebase.firestore();
 
@@ -31,10 +26,10 @@ const signout = () => {
 
     firebase.auth().signOut().then(() => {
         // Sign-out successful.
-      }).catch((error) => {
+    }).catch((error) => {
         // An error happened.
-      });
-  }
+    });
+}
 
 const useStyles = makeStyles((theme) => ({
     content: {
@@ -88,54 +83,25 @@ export default function Home() {
     const currentUser = firebase.auth().currentUser;
     const [postCount, setPostCount] = useState(0);
     const classes = useStyles();
-    const [replyModal, setReplyModal] = useState(false);
     const [userPosts, setPosts] = useState({
         posts: null,
     });
     const [userLikes, setLikes] = useState({
         likes: null,
     });
-    const [postReplies, setPostReplies] = useState({
-        replies: null,
-    });
-    const fetchReply = (postId) => {
-        db.collection("reply")
-            .orderBy("date_replied")
-            .onSnapshot((snapshot) => {
-                if (snapshot) {
-                    let reply = [];
-                    snapshot.forEach((doc) => {
-                        if (doc.data().postReplied === postId) {
-                            reply.unshift({ ...doc.data(), id: doc.id });
-                        }
-                    }
-                    );
-                    setPostReplies({ replies: reply });
-                } else {
-                    console.log("empty")
-                }
-            });
-    }
-    const [avatar, setAvatar] = useState({
-        src: null,
-    });
+
+
+
     const [profileModal, setProfileModal] = useState(false)
     const [profile, getProfile] = useState({
         userName: "",
         displayName: "",
-        locDesc: "",
-        bioDesc: "",
+        ageDesc: "",
+
         displayPicture: ""
     });
     const deletePost = (id) => {
-        fetchReply(id);
-        postReplies.replies && postReplies.replies.map((replies) => {
-            if (replies.postReplied === id) {
-                db.collection("reply")
-                    .doc(replies.id)
-                    .delete();
-            }
-        })
+
         db.collection("posts")
             .doc(id)
             .delete();
@@ -176,11 +142,7 @@ export default function Home() {
                 })
         }
     }
-    const [openID, setOpenID] = useState(0);
-    const replyPost = (postID) => {
-        setOpenID(postID);
-        setReplyModal(true);
-    }
+
     useEffect(() => {
         let abortController = new AbortController();
         const fetchData = () => {
@@ -205,14 +167,12 @@ export default function Home() {
                         getProfile({
                             userName: "@" + doc.data().username,
                             displayName: doc.data().firstName + " " + doc.data().lastName,
-                            locDesc: doc.data().locDesc,
-                            bioDesc: "\"" + doc.data().bioDesc + "\"",
+
+                            bioDesc: "" + doc.data().ageDesc + " ",
                             displayPicture: doc.data().profilePic
                         });
                     }
-                    if (doc.data().profilePic === true) {
-                        fetchAvatar();
-                    }
+
                 })
                 .catch((err) => {
                     console.log(err);
@@ -228,18 +188,7 @@ export default function Home() {
                 });
         };
 
-        const fetchAvatar = () => {
-            const currentUser = firebase.auth().currentUser;
-            var storageRef = firebase.storage().ref();
-            storageRef
-                .child("images/" + currentUser.uid)
-                .getDownloadURL()
-                .then((url) => {
-                    setAvatar({
-                        src: url,
-                    });
-                });
-        };
+
         fetchData();
         return () => {
             setPosts({ posts: null });
@@ -251,6 +200,8 @@ export default function Home() {
         <div>
             <Navigation />
             <main>
+
+
                 <div
                     className={clsx(classes.content, {
                         [classes.contentShift]: true,
@@ -259,40 +210,31 @@ export default function Home() {
                     <div className={classes.drawerHeader} />
                     <Card variant="outlined" id="cardMyProfile">
                         <CardContent>
-                            <div className={classes.centerDiv}>
-                                <Avatar
-                                    id="centerAvatar"
-                                    src={avatar.src || ".././CSS/images/profile.png"}
-                                />
-                            </div>
-                            <div className={classes.centerDiv}>
-                                <Typography className={classes.nameDisplay} variant="h6" color="primary">
-                                    {profile.displayName}
+
+                            <div className={classes.leftDiv}>
+                                <Typography variant="h5">
+                                    Full Name: {profile.displayName}
                                 </Typography>
                             </div>
-                            <div className={classes.centerDiv}>
-                                <Typography variant="body2">
-                                    {profile.userName}
+
+
+                            <div className={classes.leftDiv}>
+                                <Typography variant="h5">
+                                    UserName:  {profile.userName}
                                 </Typography>
                             </div>
-                            <div className={classes.centerDiv}>
-                                <Typography variant="subtitle2" align="center">
-                                    {profile.bioDesc}
+                            <div className={classes.leftDiv}>
+                                <Typography variant="h5" >
+                                    Age:  {profile.bioDesc}Years old
                                 </Typography>
                             </div>
-                            <div className={classes.centerDiv}>
-                                <Typography variant="body2">
-                                    <LocationOnIcon className={classes.smallIcon} />
-                                    {profile.locDesc}
+                            <div className={classes.leftDiv}>
+                                <Typography variant="h5">
+                                    Post/s:  {postCount}
                                 </Typography>
                             </div>
-                            <div id="socialInfo">
-                                <div>
-                                    <Typography variant="body2">
-                                        {postCount} Posts
-                                    </Typography>
-                                </div>
-                            </div>
+
+
                             <div id="socialInfo">
                                 <Button
                                     id="editProfile"
@@ -304,7 +246,18 @@ export default function Home() {
                                 >
                                     Edit Profile
                                 </Button>
-                                <Button class="sign" onClick={signout}><i class="fa fa-sign-out" aria-hidden="true"></i>SIGN OUT</Button>
+
+                                <Button
+                                    id="editProfile"
+                                    variant="outlined"
+                                    color="primary"
+                                    size="small"
+                                    disableElevation
+                                    onClick={() => signout(true)}
+                                >
+                                    Sign out
+                                </Button>
+
                             </div>
 
                         </CardContent>
@@ -320,19 +273,13 @@ export default function Home() {
                                         key={posts.id}
                                     >
                                         <Grid container wrap="nowrap" spacing={2}>
-                                            <Grid item>
-                                                <Avatar
-                                                    src={avatar.src || ".././assets/images/profile.png"}
-                                                />
-                                            </Grid>
+
                                             <Grid item xs zeroMinWidth>
                                                 <div id="thisPost">
                                                     <Typography id="postDN" variant="subtitle1">
                                                         {profile.displayName}
                                                     </Typography>
-                                                    <Typography variant="body2">
-                                                        {profile.userName}
-                                                    </Typography>
+
                                                 </div>
                                             </Grid>
                                             <Grid item>
@@ -348,13 +295,7 @@ export default function Home() {
                                         </Grid>
                                         <Divider className={classes.divider} />
                                         <CardActions disableSpacing>
-                                            <IconButton
-                                                className={classes.button}
-                                                onClick={() => replyPost(posts.id)}
-                                            >
-                                                <ReplyIcon />
-                                                <Typography> {posts.replyCount}</Typography>
-                                            </IconButton>
+
                                             <IconButton
                                                 color={checkLike(posts.id) === true ? "primary" : "default"}
                                                 className={classes.button}
@@ -376,7 +317,6 @@ export default function Home() {
                     </List>
                 </div>
                 <ProfileModal open={profileModal} setOpen={setProfileModal} />
-                <ReplyModal open={replyModal} setOpen={setReplyModal} postID={openID} />
             </main>
         </div>
     );

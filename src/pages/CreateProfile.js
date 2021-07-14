@@ -60,7 +60,6 @@ export default function CreateProfile() {
     firstName: "",
     lastName: "",
     bioDesc: "",
-    locDesc: "",
     userName: "",
   });
 
@@ -120,7 +119,6 @@ export default function CreateProfile() {
           firstName: profile.firstName,
           lastName: profile.lastName,
           bioDesc: profile.bioDesc,
-          locDesc: profile.locDesc,
           username: profile.userName,
           profilePic: true,
         })
@@ -143,7 +141,6 @@ export default function CreateProfile() {
               firstName: doc.data().firstName,
               lastName: doc.data().lastName,
               bioDesc: doc.data().bioDesc,
-              locDesc: doc.data().locDesc,
               userName: doc.data().username,
               imageExists: doc.data().profilePic
             });
@@ -249,16 +246,7 @@ export default function CreateProfile() {
               value={profile.bioDesc || ''}
               autoComplete="current-password"
             />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              name="location"
-              label="Location"
-              onChange={handleChange("locDesc")}
-              value={profile.locDesc || ''}
-              autoComplete="current-password"
-            />
+
             <Button
               type="submit"
               fullWidth

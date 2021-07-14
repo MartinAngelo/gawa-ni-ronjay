@@ -18,10 +18,8 @@ import {
   IconButton,
   CardActions,
 } from "@material-ui/core";
-import ReplyIcon from "@material-ui/icons/Reply";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
-import ReplyModal from "../components/modals/ReplyModal";
 
 const drawerWidth = 240;
 
@@ -67,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Home() {
   const db = firebase.firestore();
   const currentUser = firebase.auth().currentUser;
-  const [replyModal, setReplyModal] = useState(false)
   const classes = useStyles();
   const [userPosts, setPosts] = useState({
     posts: null,
@@ -118,7 +115,7 @@ export default function Home() {
     })
     return test;
   }
-  const likePost = (id, userID) => {
+  const likePost = (id) => {
     const increment = firebase.firestore.FieldValue.increment(1);
     const decrement = firebase.firestore.FieldValue.increment(-1);
     if (checkLike(id) === true) {
@@ -145,26 +142,12 @@ export default function Home() {
         .set({
           postLiked: id,
         })
-      const notifMessage = " liked your post!";
-      db.collection("users")
-        .doc(userID)
-        .collection("notifs")
-        .add({
-          notifiedPost: id,
-          notifContent: profile.userName + notifMessage,
-          date_notif: new Date().toISOString(),
-          notifAvatar: avatar.src,
-          sourceUser: currentUser.uid
-        });
+
     }
   }
 
 
-  const [openID, setOpenID] = useState(0);
-  const replyPost = (postID) => {
-    setOpenID(postID);
-    setReplyModal(true);
-  }
+
 
   useEffect(() => {
     let abortController = new AbortController();
@@ -321,7 +304,7 @@ export default function Home() {
                     </Grid>
                     <Divider className={classes.divider} />
                     <CardActions disableSpacing>
-              
+
                       <IconButton
                         color={checkLike(posts.id) === true ? "primary" : "default"}
                         className={classes.button}
@@ -335,7 +318,7 @@ export default function Home() {
                 );
               })}
           </List>
-          <ReplyModal open={replyModal} setOpen={setReplyModal} postID={openID} />
+
         </div>
       </main>
     </div>

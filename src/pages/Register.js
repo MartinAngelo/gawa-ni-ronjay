@@ -88,9 +88,20 @@ export default function Register() {
         </div>
         <div className="form">
 
+
+        <label htmlFor="firstName">Name</label>
+          <input
+            id="firstName"
+            label="firstName"
+            type="text"
+            name="firstName"
+            autoComplete="firstName"
+            onChange={handleChange("firstName")}
+            value={payload.firstName}
+          />
+
           <label htmlFor="username">Email</label>
           <input
-
             id="email"
             label="Email Address"
             type="email"
@@ -99,6 +110,8 @@ export default function Register() {
             onChange={handleChange("email")}
             value={payload.email}
           />
+
+          
 
           <label htmlFor="password">Password</label>
           <input
@@ -110,6 +123,7 @@ export default function Register() {
             value={payload.pass}
             autoComplete="current-password"
           />
+          
 
           <label htmlFor="confirmPass">Confirm Password</label>
           <input
