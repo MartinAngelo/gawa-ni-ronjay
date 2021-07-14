@@ -32,11 +32,14 @@ import CreateProfile from "./pages/CreateProfile";
 
 
 
+
+
 import PrivateRoute from "./routers/PrivateRoute";
 import PublicRoute from "./routers/PublicRoute";
 
 import chat from "./pages/Chat";
 import SendMessage from "./pages/SendMessage";
+
 
 
 
@@ -131,6 +134,8 @@ function App() {
             path="/SendMessage"
             exact
           />
+
+      
         </Switch>
       </Router>
     </ThemeProvider>

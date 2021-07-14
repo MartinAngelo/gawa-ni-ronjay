@@ -1,277 +1,207 @@
-import React, { useState, useEffect } from "react";
-import clsx from "clsx";
-
-import pusa from '../pic/pusa1.png'
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
 import {
-  List,
-  Typography,
-  Divider,
-  IconButton,
-  Toolbar,
   AppBar,
-  CssBaseline,
-  Avatar,
+  Toolbar,
+  Typography,
+  makeStyles,
+  Button,
+  IconButton,
   Drawer,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
+  Link,
+  MenuItem,
 } from "@material-ui/core";
-//icons
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import GroupIcon from '@material-ui/icons/Group';
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import SearchIcon from "@material-ui/icons/Search";
-import MoreIcon from "@material-ui/icons/MoreVert";
-import HomeIcon from "@material-ui/icons/Home";
-import NotifIcon from "@material-ui/icons/Notifications";
-import ExitIcon from "@material-ui/icons/ExitToApp";
-import firebase from "../utils/firebase";
 import MenuIcon from "@material-ui/icons/Menu";
+import React, { useState, useEffect } from "react";
+import { Link as RouterLink } from "react-router-dom";
 
-const drawerWidth = 240;
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
+
+
+import firebase from "../utils/firebase";
+const signout = () => {
+
+  firebase.auth().signOut().then(() => {
+      // Sign-out successful.
+    }).catch((error) => {
+      // An error happened.
+    });
+}
+const headersData = [
+  {
+    label: "HOME",
+    href: "/home",
   },
-  appBar: {
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+  {
+    label: "Messages",
+    href: "/chat",
   },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+  {
+    label: "My Account",
+    href: "/profile",
+  },
+
+  
+];
+
+const useStyles = makeStyles(() => ({
+  header: {
+    backgroundColor: "#ff8941",
+    paddingRight: "79px",
+    paddingLeft: "118px",
+    "@media (max-width: 900px)": {
+      paddingLeft: 0,
+    },
+  },
+  logo: {
+    fontFamily: "Work Sans, sans-serif",
+    fontWeight: 600,
+    color: "#FFFEFE",
+    textAlign: "left",
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    fontFamily: "Open Sans, sans-serif",
+    fontWeight: 700,
+    size: "18px",
+    marginLeft: "38px",
   },
-  hide: {
-    display: "none",
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
+  toolbar: {
     display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
+    justifyContent: "space-between",
   },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
-  drawerIcon: {
-    float: "right",
-    margin: "auto",
-    marginRight: 3,
+  drawerContainer: {
+    padding: "20px 30px",
   },
 }));
-const db = firebase.firestore();
-export default function Navigation() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-  const [avatar, setAvatar] = useState({
-    src: null,
+
+export default function Header() {
+  const { header, logo, menuButton, toolbar, drawerContainer } = useStyles();
+
+  const [state, setState] = useState({
+    mobileView: false,
+    drawerOpen: false,
+
+    
   });
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  const [userProfile, setUserProfile] = useState({
-    firstName: "",
-    lastName: "",
-    bioDesc: "",
-    locDesc: "",
-    userName: "",
-    displayPicture: false
-  });
-  const signout = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => { })
-      .catch((error) => { });
-  };
+  const { mobileView, drawerOpen } = state;
 
   useEffect(() => {
-    const currentUser = firebase.auth().currentUser;
-    let abortController = new AbortController();
-    const fetchData = () => {
-      db.collection("users")
-        .doc(currentUser.uid)
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            setUserProfile({
-              userName: doc.data().username,
-              firstName: doc.data().firstName,
-              lastName: doc.data().lastName,
-              bioDesc: doc.data().bioDesc,
-              locDesc: doc.data().locDesc,
-              displayPicture: doc.data().profilePic
-            });
-            if (doc.data().profilePic) {
-              fetchAvatar();
-            }
-          }
+    const setResponsiveness = () => {
+      return window.innerWidth < 900
+        ? setState((prevState) => ({ ...prevState, mobileView: true }))
+        : setState((prevState) => ({ ...prevState, mobileView: false }));
+    };
 
-        })
-        .catch((err) => { });
-    };
-    const fetchAvatar = () => {
-      const currentUser = firebase.auth().currentUser;
-      var storageRef = firebase.storage().ref();
-      storageRef
-        .child("images/" + currentUser.uid)
-        .getDownloadURL()
-        .then((url) => {
-          setAvatar({
-            src: url,
-          });
-        });
-    };
-    fetchData();
+    setResponsiveness();
+
+    window.addEventListener("resize", () => setResponsiveness());
+
     return () => {
-      abortController.abort();
+      window.removeEventListener("resize", () => setResponsiveness());
     };
   }, []);
 
+  const displayDesktop = () => {
+    return (
+      <Toolbar className={toolbar}>
+        {femmecubatorLogo}
+        <div>{getMenuButtons()}</div>
+      </Toolbar>
+      
+    );
+  };
+
+  const displayMobile = () => {
+    const handleDrawerOpen = () =>
+      setState((prevState) => ({ ...prevState, drawerOpen: true }));
+    const handleDrawerClose = () =>
+      setState((prevState) => ({ ...prevState, drawerOpen: false }));
+
+    return (
+      <Toolbar>
+        <IconButton
+          {...{
+            edge: "start",
+            color: "inherit",
+            "aria-label": "menu",
+            "aria-haspopup": "true",
+            onClick: handleDrawerOpen,
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
+
+        <Drawer
+          {...{
+            anchor: "left",
+            open: drawerOpen,
+            onClose: handleDrawerClose,
+          }}
+        >
+          <div className={drawerContainer}>{getDrawerChoices()}</div>
+        </Drawer>
+
+        <div>{femmecubatorLogo}</div>
+      </Toolbar>
+    );
+  };
+
+  const getDrawerChoices = () => {
+    return headersData.map(({ label, href }) => {
+      return (
+        <Link
+          {...{
+            component: RouterLink,
+            to: href,
+            color: "inherit",
+            style: { textDecoration: "none" },
+            key: label,
+            key: signout,
+          }}
+        >
+          <MenuItem>{label }</MenuItem>
+     
+        </Link>
+      );
+    });
+  };
+
+  const femmecubatorLogo = (
+    <Typography variant="h6" component="h1" className={logo}>
+      Meower
+    </Typography>
+  );
+
+  const getMenuButtons = () => {
+    return headersData.map(({ label, href }) => {
+      return (
+        <Button
+          {...{
+            key: label,
+            color: "inherit",
+            to: href,
+            component: RouterLink,
+            className: menuButton,
+          }}
+        >
+          {label}
+         
+        </Button>
+        
+        
+       
+      );
+    });
+    
+  };
+
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        elevation={0}
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-        color="primary"
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            component="span"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <div id="searchText">
-            <IconButton aria-label="search" color="inherit">
-              <SearchIcon />
-            </IconButton>
-            <IconButton
-              aria-label="display more actions"
-              edge="end"
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
-        </Toolbar>
+    <header>
+      <AppBar className={header}>
+        
+        {mobileView ? displayMobile() : displayDesktop()}
+        
       </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <div className={classes.drawerIcon}>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "ltr" ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
-            </IconButton>
-          </div>
-        </div>
-        <div id="center">
-
-          <img src={pusa} className="pusa" alt="logo" />
-        </div>
-        <Typography variant="h6" noWrap id="name">
-          {userProfile.firstName} {userProfile.lastName}
-        </Typography>
-        <Typography variant="subtitle1" noWrap id="email">
-          @{userProfile.userName}
-        </Typography>
-        <List>
-          <ListItem button component={Link} to={"/profile"}>
-            <ListItemIcon>
-              <AccountCircle color="primary" />
-            </ListItemIcon>
-            <ListItemText>My Profile</ListItemText>
-          </ListItem>
-          <ListItem button component={Link} to={"/home"}>
-            <ListItemIcon>
-              <HomeIcon color="primary" />
-            </ListItemIcon>
-            <ListItemText>Home</ListItemText>
-          </ListItem>
-
-
-          <ListItem button component={Link} to={"/Chat"}>
-            <ListItemIcon>
-              <NotifIcon color="primary" />
-            </ListItemIcon>
-            <ListItemText>Messages</ListItemText>
-          </ListItem>
-
-
-          <ListItem button component={Link} to={"/friends"}>
-            <ListItemIcon>
-              <GroupIcon color="primary" />
-            </ListItemIcon>
-            <ListItemText>Friends</ListItemText>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem button onClick={signout}>
-            <ListItemIcon>
-              <ExitIcon color="primary" />
-            </ListItemIcon>
-            <ListItemText>Log Out</ListItemText>
-          </ListItem>
-        </List>
-      </Drawer>
-    </div>
+    </header>
   );
 }

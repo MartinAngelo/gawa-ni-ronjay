@@ -27,6 +27,15 @@ import ReplyModal from "../components/modals/ReplyModal";
 const drawerWidth = 240;
 const db = firebase.firestore();
 
+const signout = () => {
+
+    firebase.auth().signOut().then(() => {
+        // Sign-out successful.
+      }).catch((error) => {
+        // An error happened.
+      });
+  }
+
 const useStyles = makeStyles((theme) => ({
     content: {
         flexGrow: 1,
@@ -295,7 +304,9 @@ export default function Home() {
                                 >
                                     Edit Profile
                                 </Button>
+                                <Button class="sign" onClick={signout}><i class="fa fa-sign-out" aria-hidden="true"></i>SIGN OUT</Button>
                             </div>
+
                         </CardContent>
                     </Card>
                     <List>

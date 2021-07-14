@@ -321,13 +321,7 @@ export default function Home() {
                     </Grid>
                     <Divider className={classes.divider} />
                     <CardActions disableSpacing>
-                      <IconButton
-                        className={classes.button}
-                        onClick={() => replyPost(posts.id)}
-                      >
-                        <ReplyIcon />
-                        <Typography>{posts.replyCount}</Typography>
-                      </IconButton>
+              
                       <IconButton
                         color={checkLike(posts.id) === true ? "primary" : "default"}
                         className={classes.button}
