@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import pusa from '../pic/pusa1.png'
 import firebase from "../utils/firebase";
 export default function Login() {
   const [payload, setPayload] = useState({
     email: "",
     pass: "",
+    
 
   });
 
@@ -49,6 +50,10 @@ export default function Login() {
           <h4 className="animation a2">Log in to your account using email and password</h4>
         </div>
         <div className="form">
+
+
+
+        
           <label htmlFor="username">Email</label>
           <input
             type="email"
@@ -66,7 +71,7 @@ export default function Login() {
             name="password"
             label="Password"
             id="emails"
-            
+
             autoComplete="current-password"
             onChange={handleChange("pass")}
             value={payload.pass}

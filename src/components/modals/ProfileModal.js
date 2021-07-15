@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import logo from "../../CSS/images/icon.svg";
 import firebase from "../../utils/firebase";
 import {
     Paper,
     TextField,
     IconButton,
-    Avatar,
     Grid,
     Button,
-    Typography,
+
     Modal
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -78,7 +76,7 @@ export default function ProfileModal({ open, setOpen }) {
         firstName: "",
         lastName: "",
         bioDesc: "",
-        locDesc: "",
+        ageDesc: "",
         userName: "",
     });
     const handleChange = (prop) => (e) => {
@@ -134,7 +132,7 @@ export default function ProfileModal({ open, setOpen }) {
                     firstName: profile.firstName,
                     lastName: profile.lastName,
                     bioDesc: profile.bioDesc,
-                    locDesc: profile.locDesc,
+                    ageDesc: profile.ageDesc,
                     username: profile.userName,
                     profilePic: true
                 })
@@ -166,14 +164,7 @@ export default function ProfileModal({ open, setOpen }) {
                         type="file"
                         onChange={handleImageChange}
                     />
-                    <label htmlFor="pictureDisplay">
-                        <IconButton component="span">
-                            <Avatar
-                                src={image.displayURL || "../../assets/images/profile.png"}
-                                className={classes.large}
-                            />
-                        </IconButton>
-                    </label>
+
                     <form className={classes.form} noValidate>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
@@ -211,32 +202,22 @@ export default function ProfileModal({ open, setOpen }) {
                             margin="normal"
                             fullWidth
                             name="username"
-                            label="Username"
+                            label="Email"
                             onChange={handleChange("userName")}
                             value={profile.userName}
                             size="small"
                             autoComplete="current-password"
                         />
+
                         <TextField
                             variant="outlined"
                             margin="normal"
                             fullWidth
-                            name="biography"
-                            label="Biography"
+                            name="age"
+                            label="Age"
                             size="small"
-                            onChange={handleChange("bioDesc")}
-                            value={profile.bioDesc}
-                            autoComplete="current-password"
-                        />
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            fullWidth
-                            name="location"
-                            label="Location"
-                            size="small"
-                            onChange={handleChange("locDesc")}
-                            value={profile.locDesc}
+                            onChange={handleChange("ageDesc")}
+                            value={profile.ageDesc}
                             autoComplete="current-password"
                         />
                         <Button
@@ -247,7 +228,7 @@ export default function ProfileModal({ open, setOpen }) {
                             className={classes.submit}
                             onClick={createprofile}
                         >
-                            Create my Profile
+                            Update my Profile
                         </Button>
                     </form>
                 </div>

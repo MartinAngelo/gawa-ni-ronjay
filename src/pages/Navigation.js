@@ -13,17 +13,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import React, { useState, useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
-
-
-import firebase from "../utils/firebase";
-const signout = () => {
-
-  firebase.auth().signOut().then(() => {
-      // Sign-out successful.
-    }).catch((error) => {
-      // An error happened.
-    });
-}
 const headersData = [
   {
     label: "HOME",
@@ -38,7 +27,7 @@ const headersData = [
     href: "/profile",
   },
 
-  
+
 ];
 
 const useStyles = makeStyles(() => ({
@@ -78,10 +67,10 @@ export default function Header() {
     mobileView: false,
     drawerOpen: false,
 
-    
+
   });
 
-  
+
 
   const { mobileView, drawerOpen } = state;
 
@@ -107,7 +96,7 @@ export default function Header() {
         {femmecubatorLogo}
         <div>{getMenuButtons()}</div>
       </Toolbar>
-      
+
     );
   };
 
@@ -156,11 +145,11 @@ export default function Header() {
             color: "inherit",
             style: { textDecoration: "none" },
             key: label,
-            key: signout,
+
           }}
         >
-          <MenuItem>{label }</MenuItem>
-     
+          <MenuItem>{label}</MenuItem>
+
         </Link>
       );
     });
@@ -168,6 +157,7 @@ export default function Header() {
 
   const femmecubatorLogo = (
     <Typography variant="h6" component="h1" className={logo}>
+
       Meower
     </Typography>
   );
@@ -185,22 +175,22 @@ export default function Header() {
           }}
         >
           {label}
-         
+
         </Button>
-        
-        
-       
+
+
+
       );
     });
-    
+
   };
 
   return (
     <header>
       <AppBar className={header}>
-        
+
         {mobileView ? displayMobile() : displayDesktop()}
-        
+
       </AppBar>
     </header>
   );

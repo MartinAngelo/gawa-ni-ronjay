@@ -22,29 +22,27 @@ function Chat() {
   return (
     <div className="chatbox">
       <Navigation />
-      <div className="msgs">
+      <div className="containermsg">
+        <div className="msgs">
 
-        <div className="description">
-          <h2>
-            <p>CHAT WITH ANONYMOUS PERSON'S </p>
-          </h2>
-        </div>
-        {messages.map(({ id, text, photoURL, uid }) => (
-          <div>
-            <div
-              key={id}
-              className={`msg ${uid === auth.currentUser.uid ? "sent" : "received"
-                }`}
-            >
-              <img src={photoURL} alt="" />
-              <p>{text}</p>
+
+          {messages.map(({ id, text, photoURL, uid }) => (
+            <div>
+              <div
+                key={id}
+                className={`msg ${uid === auth.currentUser.uid ? "sent" : "received"
+                  }`}
+              >
+                <img src={photoURL} alt="" />
+                <p>{text}</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <SendMessage scroll={scroll} />
-      <div ref={scroll}></div>
+        <SendMessage scroll={scroll} />
+        <div ref={scroll}></div>
+      </div>
     </div>
   );
 }

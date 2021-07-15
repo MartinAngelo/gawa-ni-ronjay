@@ -12,6 +12,7 @@ export default function Register() {
     email: "",
     pass: "",
     confirmPass: "",
+    fname: "",
   });
 
 
@@ -50,8 +51,8 @@ export default function Register() {
             .set({
               firstName: "First Name",
               lastName: "Last Name",
-              bioDesc: "",
-              locDesc: "",
+              fname: "fname",
+
               username: payload.email,
               profilePic: false,
 
@@ -88,9 +89,10 @@ export default function Register() {
         </div>
         <div className="form">
 
+
+
           <label htmlFor="username">Email</label>
           <input
-
             id="email"
             label="Email Address"
             type="email"
@@ -110,6 +112,7 @@ export default function Register() {
             value={payload.pass}
             autoComplete="current-password"
           />
+
 
           <label htmlFor="confirmPass">Confirm Password</label>
           <input
