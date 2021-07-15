@@ -64,12 +64,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Home() {
   const db = firebase.firestore();
- 
+
   const classes = useStyles();
   const [userPosts, setPosts] = useState({
     posts: null,
   });
- 
+
   const [avatar, setAvatar] = useState({
     src: null,
   });
@@ -104,8 +104,8 @@ export default function Home() {
     displayPicture: false,
   });
 
-  
- 
+
+
   useEffect(() => {
     let abortController = new AbortController();
     const db = firebase.firestore();
@@ -125,7 +125,7 @@ export default function Home() {
       getUser.get().then((doc) => {
         if (doc.exists) {
           getProfile({
-            userName: "@" + doc.data().username,
+            userName: "" + doc.data().username,
             displayName: doc.data().firstName + " " + doc.data().lastName,
             displayPicture: doc.data().profilePic
           });
@@ -144,7 +144,7 @@ export default function Home() {
           snapshot.forEach((doc) => {
             likes.unshift({ ...doc.data(), id: doc.id });
           });
-         
+
         });
     };
     fetchData();
@@ -235,7 +235,7 @@ export default function Home() {
                     <Grid container wrap="nowrap" spacing={2}>
                       <Grid item>
                         <Avatar
-                          src={ "./pic/pusa3.png"}
+                          src={"./pic/pusa3.png"}
                         />
                       </Grid>
                       <Grid item xs zeroMinWidth>
@@ -263,9 +263,9 @@ export default function Home() {
                     <CardActions disableSpacing>
 
                       <IconButton
-                      
+
                         className={classes.button}
-                       
+
                       >
                         <FavoriteIcon />
                         <Typography> {posts.likes}</Typography>
