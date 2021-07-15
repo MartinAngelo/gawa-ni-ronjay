@@ -64,14 +64,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Home() {
   const db = firebase.firestore();
-  const currentUser = firebase.auth().currentUser;
+ 
   const classes = useStyles();
   const [userPosts, setPosts] = useState({
     posts: null,
   });
-  const [userLikes, setLikes] = useState({
-    likes: null,
-  });
+ 
   const [avatar, setAvatar] = useState({
     src: null,
   });
@@ -106,49 +104,8 @@ export default function Home() {
     displayPicture: false,
   });
 
-  const checkLike = (postID) => {
-    let test = false;
-    userLikes.likes && userLikes.likes.map((likes) => {
-      if (likes.postLiked === postID) {
-        test = true;
-      }
-    })
-    return test;
-  }
-  const likePost = (id) => {
-    const increment = firebase.firestore.FieldValue.increment(1);
-    const decrement = firebase.firestore.FieldValue.increment(-1);
-    if (checkLike(id) === true) {
-      db.collection("posts")
-        .doc(id)
-        .update({
-          likes: decrement
-        });
-      db.collection("users")
-        .doc(currentUser.uid)
-        .collection("likes")
-        .doc(id)
-        .delete();
-    } else {
-      db.collection("posts")
-        .doc(id)
-        .update({
-          likes: increment
-        });
-      db.collection("users")
-        .doc(currentUser.uid)
-        .collection("likes")
-        .doc(id)
-        .set({
-          postLiked: id,
-        })
-
-    }
-  }
-
-
-
-
+  
+ 
   useEffect(() => {
     let abortController = new AbortController();
     const db = firebase.firestore();
@@ -187,7 +144,7 @@ export default function Home() {
           snapshot.forEach((doc) => {
             likes.unshift({ ...doc.data(), id: doc.id });
           });
-          setLikes({ likes: likes });
+         
         });
     };
     fetchData();
@@ -306,9 +263,9 @@ export default function Home() {
                     <CardActions disableSpacing>
 
                       <IconButton
-                        color={checkLike(posts.id) === true ? "primary" : "default"}
+                      
                         className={classes.button}
-                        onClick={() => likePost(posts.id, posts.userID)}
+                       
                       >
                         <FavoriteIcon />
                         <Typography> {posts.likes}</Typography>
